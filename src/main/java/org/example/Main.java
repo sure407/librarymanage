@@ -19,7 +19,9 @@ public class Main {
             int choice = sc.nextInt();
             sc.nextLine();
 
-            if (choice == 1) {
+            switch (choice){
+                case 1:
+
                 System.out.println("Enter the book Title: ");
                 String title = sc.nextLine();
 
@@ -32,19 +34,25 @@ public class Main {
                 sc.nextLine();
 
                 System.out.println("Enter the book Publication Year in YYYY format: ");
-                String publishYear = sc.nextLine();
+                String publishYear = String.valueOf(sc.nextLine().matches("YYYY"));
 
                 System.out.println("Enter the book available Stock: ");
                 Integer stock = sc.nextInt();
 
                 library.addBook(new BooksDetails(title, author, price, publishYear, stock));
-            } else if (choice == 2) {
+            case 2:
                 library.displayBooks();
-            } else {
+                break;
+            case 3:
                 System.out.println("Exits");
+                sc.close();
+                return;
+            default :
+                System.out.println("Invalid input provided by user:");
                 break;
             }
+
         }
-        sc.close();
+
     }
 }
