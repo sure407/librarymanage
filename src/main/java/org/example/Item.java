@@ -3,28 +3,32 @@ package org.example;
 import java.time.LocalDate;
 
 public abstract class Item {
+    protected  int bookIdCounter = 1;
     protected int bookId;
     protected String title;
     protected String author;
     protected double price;
     protected LocalDate addedDate;
 
-    public Item(int bookId, String title, String author, double price) {
-        this.bookId = bookId;
+    public Item(String title, String author, double price) {
+        this.bookId = generatebookId();
         this.title = title;
         this.author = author;
         this.price = price;
         this.addedDate = LocalDate.now();
     }
 
+    private int generatebookId(){
+        return bookIdCounter++;
+    }
     //getter's and setter's
     public int getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
+//    public void setBookId(int bookId) {
+//        this.bookId = bookId;
+//    }
 
     public String getTitle() {
         return title;
@@ -53,18 +57,7 @@ public abstract class Item {
 
 }
 
-//    public String getPublishYear(){
-//        return publishYear;
-//    }
-//    public void setPublishYear(String publishYear){
-//        this.publishYear = publishYear;
-//    }
-//    public int getStock(){
-//        return stock;
-//    }
-//    public void setStock(int stock){
-//        this.stock = stock;
-//    }
+
 
 
 
