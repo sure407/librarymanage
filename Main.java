@@ -1,0 +1,78 @@
+
+
+
+import java.awt.print.Book;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        System.out.println("Hello This is Library Management System");
+// create object of library and user input
+        Library library = new Library();
+        Scanner sc = new Scanner(System.in);
+//show screen to user
+        while (true) {
+            System.out.println("Press 1- Enter Add Books");
+            System.out.println("Press 2- See Already added Books");
+            System.out.println("Press 3- Sell Book: ");
+            System.out.println("Press 4- View Sales History: ");
+            System.out.println("Press 5- Exit: ");
+            System.out.println("Choose an option:");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1 -> addBook(sc, library);
+                case 2 -> library.displayBooks();
+                case 3 -> sellBook(sc, library);
+                case 4 -> library.displaySalesHistory();
+                case 5 -> {
+                    System.out.println("Exiting...");
+                    sc.close();
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice try again.");
+            }
+        }
+    }
+
+    private static void addBook(Scanner sc, Library library) {
+
+        System.out.println("Enter Book Id: ");
+        int bookId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter the book Title: ");
+        String title = sc.nextLine();
+
+        System.out.println("Enter the book Author: ");
+        String author = sc.nextLine();
+
+        System.out.println("Enter the book Price: ");
+        Double price = sc.nextDouble();
+
+        sc.nextLine();
+
+        System.out.println("Enter the book Publication Year in YYYY format: ");
+        String publishYear = sc.nextLine();
+
+        System.out.println("Enter the book available Stock: ");
+        Integer stock = sc.nextInt();
+
+        //library.addBook(new BooksDetails(title, author, price, publishYear, stock));
+        BooksDetails book = new BooksDetails(bookId, title, author, price, publishYear, stock);
+        library.addBook(book);
+    }
+    private static void sellBook(Scanner sc, Library library) {
+        System.out.print("Enter Book ID to Sell: ");
+        int bookId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Enter Buyer Name: ");
+        String buyerName = sc.nextLine();
+
+        library.sellBook(bookId, buyerName);
+    }
+}
