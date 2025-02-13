@@ -5,7 +5,7 @@ public class BooksDetails extends Item{
         private String publishYear;
         private int stock;
 
-public BooksDetails(int bookId, String title, String author, double price, String publishYear, int stock)
+public BooksDetails(String title, String author, double price, String publishYear, int stock)
     {
             super(title,author,price);
             this.publishYear = publishYear;

@@ -3,7 +3,7 @@ package org.example;
 import java.time.LocalDate;
 
 public abstract class Item {
-    protected  int bookIdCounter = 1;
+    private static int bookIdCounter = 1 ;
     protected int bookId;
     protected String title;
     protected String author;
@@ -26,9 +26,9 @@ public abstract class Item {
         return bookId;
     }
 
-//    public void setBookId(int bookId) {
-//        this.bookId = bookId;
-//    }
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
 
     public String getTitle() {
         return title;

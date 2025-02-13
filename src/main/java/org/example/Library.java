@@ -22,6 +22,8 @@ public class Library {
     // correct code above
     public  void addBook(Scanner sc) {
 
+
+
         System.out.println("Enter the book Title: ");
         String title = sc.nextLine();
 
@@ -39,7 +41,7 @@ public class Library {
         System.out.println("Enter the book available Stock: ");
         Integer stock = sc.nextInt();
 
-        BooksDetails book = new BooksDetails(bookId, title, author, price, publishYear, stock);
+        BooksDetails book = new BooksDetails(title, author, price, publishYear, stock);
         items.add(book);
         System.out.println("Books adding successfully.");
     }
