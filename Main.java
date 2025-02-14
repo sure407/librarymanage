@@ -16,18 +16,20 @@ public class Main {
             System.out.println("Press 2- See Already added Books");
             System.out.println("Press 3- If you Sell a Book: ");
             System.out.println("Press 4- View Sell Book Details: ");
-            System.out.println("Press 5- Do you want to Exit: ");
+            System.out.println("Press 5- Delete a Book: ");
+            System.out.println("Press 6- Do you want to Exit....");
             System.out.println("Choose and Option: ");
 
-            int choice = sc.nextInt();
+            int option = sc.nextInt();
             sc.nextLine();
 
-            switch (choice) {
+            switch (option) {
                 case 1 -> library.addBook(sc);
                 case 2 -> library.displayItems();
-                case 3 -> library.sellBook(sc, library);
+                case 3 -> library.sellBook(sc);
                 case 4 -> library.displaySalesHistory();
-                case 5 -> {
+                case 5 -> library.deleteBook(sc);
+                case 6 -> {
                     System.out.println("Exiting...");
                     sc.close();
                     System.exit(0);

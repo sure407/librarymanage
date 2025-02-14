@@ -14,12 +14,10 @@ public class Library {
     // correct code above
     public  void addBook(Scanner sc) {
 
-
-
         System.out.println("Enter the book Title: ");
         String title = sc.nextLine();
 
-        System.out.println("Enter the book Author: ");
+        System.out.println("Enter the book Author name: ");
         String author = sc.nextLine();
 
         System.out.println("Enter the book Price: ");
@@ -30,8 +28,8 @@ public class Library {
         System.out.println("Enter the book Publication Year in YYYY format: ");
         String publishYear = sc.nextLine();
 
-        System.out.println("Enter the book available Stock: ");
-        Integer stock = sc.nextInt();
+        System.out.println("Enter the book Stock/quantity: ");
+        int stock = sc.nextInt();
 
         BooksDetails book = new BooksDetails(title, author, price, publishYear, stock);
         items.add(book);
@@ -48,59 +46,119 @@ public class Library {
             return;
 
         }
-
+boolean booksAvailable = false;
             for (Item item : items) {
-                if (item instanceof BooksDetails) {
-                    BooksDetails book = (BooksDetails) item;
-                    if (book.getStock()>0){
+                if (item instanceof BooksDetails book && book.getStock()>0) {
                     book.displayBook();
+                    booksAvailable = true;
                 }
-
             }
+            if (!booksAvailable){
+                System.out.println("All books sold out.. Please add more books...");
         }
     }
 
-    public void sellBook(Scanner sc, Library library){
-        if (items.isEmpty()) {
-            System.out.println("No books available for sale. Please add books first.");
+//    public void sellBook(Scanner sc){
+//        if (items.isEmpty()) {
+//            System.out.println("No books available for sale. Please add books first.");
+//            return;
+//        }
+//
+//        System.out.println("Available books:");
+//        displayItems();
+//
+//        System.out.println("Enter Book Id for Sell Book: ");
+//        int bookId = sc.nextInt();
+//        sc.nextLine();
+//
+//        System.out.println("Enter Book Quantity: ");
+//        int quantity = sc.nextInt();
+//        sc.nextLine();
+//
+//        System.out.println("Enter the Buyer Name: ");
+//        String buyerName = sc.nextLine();
+//       // library.sellItem(bookId, buyerName);
+//
+//    }
+//
+//    //Sell book
+//    public void sellItem(){//int bookId, String buyerName){
+//        for (Item item: items){
+//            if (item instanceof BooksDetails){ //type checking
+//                BooksDetails book = (BooksDetails) item; //downcasting
+//                if(book.getBookId()==bookId && book.getStock()>0){
+//
+//
+//                    book.setStock(book.getStock()-1);
+//                    SalesRecord sale = new SalesRecord(bookId, book.getTitle(), buyerName, quantity ,book.getPrice());
+//                    salesHistory.add(sale);
+//                    System.out.println("Book Sold Successfully");
+//                    return;
+//                }
+//                else if(book.getBookId()==bookId){
+//                    System.out.println("Your Book is out of stock...");
+//                    return;
+//                }
+//            }
+//        }
+//        System.out.println("Book Id not found...");
+//    }
+
+
+    public void sellBook(Scanner sc){
+        if (items.isEmpty()){
+            System.out.println("No books available to sale...");
             return;
         }
-
-        System.out.println("Available books:");
         displayItems();
-
-        System.out.println("Enter Book Id for Sell Book: ");
+        System.out.println("Enter Book Id to sale...");
         int bookId = sc.nextInt();
         sc.nextLine();
-
-        System.out.println("Enter the Buyer Name: ");
+        System.out.println("Enter Book Quantity...");
+        int quantity = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter Buyer Name...");
         String buyerName = sc.nextLine();
-        library.sellItem(bookId, buyerName);
-
-    }
-
-    //Sell book
-    public void sellItem(int bookId, String buyerName){
-        for (Item item: items){
-            if (item instanceof BooksDetails){ //type checking
-                BooksDetails book = (BooksDetails) item; //downcasting
-                if(book.getBookId()==bookId && book.getStock()>0){
-
-
-                    book.setStock(book.getStock()-1);
-                    SalesRecord sale = new SalesRecord(bookId, book.getTitle(), buyerName, book.getPrice());
-                    salesHistory.add(sale);
-                    System.out.println("Book Sold Successfully");
-                    return;
+        sc.nextLine();
+        for (Item item : items){
+            if (item instanceof BooksDetails book && book.getBookId()==bookId){
+                if (book.getStock()>= quantity){
+                    book.setStock(book.getStock()-quantity);
+                    salesHistory.add(new SalesRecord(bookId, book.getTitle(), buyerName, quantity,book.getPrice()));
+                    System.out.println("Successfully sold"+quantity+ " books..");
                 }
-                else if(book.getBookId()==bookId){
-                    System.out.println("Your Book is out of stock...");
-                    return;
+                else{
+                    System.out.println("Out of Stock: Available Only" + book.getStock()+ " books...");
                 }
+                return;
             }
         }
-        System.out.println("Book Id not found...");
+        System.out.println("Book Id not found..");
     }
+    //Delete books code
+    public void deleteBook(Scanner sc){
+                if (items.isEmpty()){
+                    System.out.println("No books available to delete...");
+                    return;
+                }
+                displayItems();
+        System.out.println("Enter book Id to delete:");
+        int bookId = sc.nextInt();
+
+        int intialSize = items.size();
+
+        items.removeIf(item-> item.getBookId()==bookId);
+        if (items.size()< intialSize) {
+            System.out.println("Book deleted sucessfully..!");
+        }
+        else {
+            System.out.println("Book Id not found.. try again..");
+        }
+
+
+}
+
+
     //Display Sales History
     public void displaySalesHistory(){
         if(salesHistory.isEmpty()){
