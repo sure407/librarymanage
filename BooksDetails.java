@@ -1,51 +1,22 @@
-import java.time.LocalDate;
 
-public class BooksDetails
-{
-    // intialize variables
-    private int bookId;
-    private String title;
-    private String author;
-    private double price;
+
+
+public class BooksDetails extends Item{
     private String publishYear;
     private int stock;
-    private LocalDate addedDate;
 
-    //create constructor
-    public BooksDetails(int bookId, String title, String author, double price, String publishYear, int stock)
+    public BooksDetails(String title, String author, double price, String publishYear, int stock)
     {
-        this.bookId= bookId;
-        this.title = title;
-        this.author = author;
-        this.price = price;
+        super(title,author,price);
         this.publishYear = publishYear;
         this.stock = stock;
-        this.addedDate = LocalDate.now();
     }
-    public int getBookId(){
-        return bookId;
+@Override
+    public void displayBook(){
+        System.out.println("Book id is: "+bookId+", Book Title is:  "+title + ", Book Author Name is: "+author+ ", Book Price is: "+price + ", Book Publish Year is: "+publishYear+ ", Book Available Stock is: "+stock+ ", Book added date: "+addedDate );
     }
-    public void setBookId(int bookId){
-        this.bookId=bookId;
-    }
-    public String getTitle(){
-        return title;
-    }
-    public void setTitle(String title){
-        this.title= title;
-    }
-    public String getAuthor(){
-        return author;
-    }
-    public void setAuthor(String author){
-        this.author = author;
-    }
-    public double getPrice(){
-        return price;
-    }
-    public void setPrice(double price){
-        this.price = price;
-    }
+
+
     public String getPublishYear(){
         return publishYear;
     }
@@ -57,11 +28,6 @@ public class BooksDetails
     }
     public void setStock(int stock){
         this.stock = stock;
-    }
-
-    // create method to display books details
-    public void displayBooks(){
-        System.out.println("Book id is: "+bookId+", Book Title is:  "+title + ", Book Author Name is: "+author+ ", Book Price is: "+price + ", Book Publish Year is: "+publishYear+ ", Book Available Stock is: "+stock + ", Added Date is: "+addedDate);
     }
 
 }
