@@ -88,10 +88,10 @@ public class Library implements Businesslogic{
                     if (book.getStock()>= quantity){
                         book.setStock(book.getStock()-quantity);
                     salesHistory.add(new SalesRecord(bookId, book.getTitle(), buyerName, quantity,book.getPrice()));
-                    System.out.println("Successfully sold"+quantity+ " books..");
+                    System.out.println("Successfully sold "+ quantity + " books..");
                     }
                 else {
-                        System.out.println("Out of Stock: Available Only\" + book.getStock()+ \" books...");
+                        System.out.println("Out of Stock: Available Only " + book.getStock()+ " books...");
                     }
                 }, ()-> System.out.println("Book Id not found..."));
     }
